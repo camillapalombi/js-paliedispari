@@ -1,42 +1,85 @@
-let evenOrOdd = prompt('Pari o Dispari?');
+/*SCELTA UTENTE PARI O DISPARI E STAMPA DELLA STRINGA!*/
 
-console.log(evenOrOdd)
+let evenOrOdd = prompt('SCEGLI: Pari o Dispari?');
+
+let printEvenOrOdd = document.querySelector('.even-odd');
+
+printEvenOrOdd.innerHTML = (`Hai scelto: ${evenOrOdd}`);
+
+
+/*CHIEDO ALL'UTENTE UN NUMERO TRA 1 & 5 E LO STAMPO*/
 
 let userNumber = parseInt(prompt('Dammi un numero da 1 a cinque'));
 
-console.log(userNumber)
+let printUserNumber = document.querySelector('.user-number');
 
-let pcNumber = Math.floor(Math.random() * (5 - 1 + 1) + 1);
+printUserNumber.innerHTML = (`Hai scelto il numero: ${userNumber}`);
 
-console.log(pcNumber)
+
+/*IL PC GENERA UN NUMERO RANDOM TRA 1 & 5 E LO STAMPO*/
+
+let pcNumber = numberRandomBetween(1, 5);
+
+let printPcNumber = document.querySelector('.pc-number');
+
+printPcNumber.innerHTML = (`Il computer ha scelto il numero: ${pcNumber}`);
+
+/*Funzione*/
+function numberRandomBetween(min , max) {
+    const randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
+    return randomNumber;
+}
+
+
+/*SOMMA DEI DUE NUMERI SCELTI E STAMPA*/
 
 let sumNumbers = userNumber + pcNumber;
 
-console.log(sumNumbers)
+let printSumNumbers = document.querySelector('.sum-numbers');
+
+printSumNumbers.innerHTML = (`La somma dei due numeri che avete scelto è: ${sumNumbers}`);
 
 
 
-if (sumNumbers % 2 === 0) {
 
-    console.log('la somma dei due numeri è pari');
+
+/*STABILIAMO SE LA SOMMA è PARI O DISPARI E STAMPO*/
+let sumEvenOrOdd = document.querySelector('.sum-even-or-odd');
+
+if (resultEven(sumNumbers)) {
+
+    sumEvenOrOdd.innerHTML = ('La somma dei due numeri è: PARI');
 
 } else {
 
-    console.log('la somma dei due numeri è dispari');
+    sumEvenOrOdd.innerHTML = ('La somma dei due numeri è: DISPARI');
 
 }
 
-if (sumNumbers % 2 === 0 && evenOrOdd === 'pari') {
+/*STABILIAMO IL VINCITORE*/
+let winner = document.querySelector('.winner');
 
-    console.log('HAI VINTO!!!!!');
-    console.log('HAI VINTO!!!!!!');
+if (resultEven(sumNumbers) && evenOrOdd === 'pari') {
 
-} else if (sumNumbers % 2 === 1 && evenOrOdd === 'dispari') {
+    winner.innerHTML = ('CONGRATULAZIONI, HAI VINTO!')
 
-    console.log('HAI VINTO!!!!!');
+} else if (!resultEven(sumNumbers) && evenOrOdd === 'dispari') {
+
+    winner.innerHTML = ('CONGRATULAZIONI, HAI VINTO!')
 
 } else {
 
-    console.log('Hai perso.');
+    winner.innerHTML = ('Mi dispiace, hai perso.')
 
+}
+
+
+/*Funzione*/
+function resultEven(testNumber) {
+
+    if (testNumber % 2 === 0) {
+        return true;
+    } else {
+        return false;
+    }
 }
